@@ -5,12 +5,13 @@ using namespace std;
 class Date {
 
 	// Friend Functions
-
+        
+	//Overloading for << operator
 	friend ostream& operator << (ostream& op, const Date& temp){
 		op << temp.monthNames[temp.month - 1] << " " << temp.date << ", " << temp.year << endl;
 		return op;
 	}
-
+        //Overloading for >> operator
 	friend istream& operator >> (istream& in, Date& temp){
 		cout << "Enter date: ";
 		in >> temp.date;
@@ -58,13 +59,14 @@ public:
 
 
 	//Operator Overloading
-
+	
+        // Overloading for == operator
 	bool operator == (const Date t2){
 		if (this -> date == t2.date && this -> month == t2.month && this -> year == t2.year){ // compares the values of 2 objects and returns true if the are the same
 			return true;
 		}
 	}
-
+        //Overloading for + operator
 	Date operator + (int num){
 		if ( this -> date < 31 && this -> date > 0){
 			for (int i = 1; i < num; i++){ // Adds days until the required days are added
@@ -81,21 +83,22 @@ public:
 		}
 		return *this;
 	}
-
+	
+        //Overloading for = operator
 	Date operator = (Date& temp){
 		this -> date = date;
 		this -> month = month;
 		this -> year = year;
 		return *this;
 	}
-
+        //Overloading for prefix -- operator
 	Date& operator -- (){
 		if( this -> date != 0){ // date cannot be 0
 			this ->date = this ->date - 1;
 			return *this; // returns the new value of date
 		}
 	}
-
+        //Overloading for postfix -- operator
 	Date& operator -- (int num){
 		Date temp = *this;
 		if( this -> date != 0){ // date cannot be 0
@@ -103,7 +106,7 @@ public:
 			return temp; //returns previous value of date
 		}
 	}
-
+        //Overloading for [] operator
 	int operator [] (int index){
 		if (index == 0 || index == 1 || index == 2){
 			if (index == 0){
@@ -124,6 +127,6 @@ public:
 
 };
 
-//Initializing of the static array
+//Initializing of the static array outside the class
 
 string Date ::  monthNames[13] = { "", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
